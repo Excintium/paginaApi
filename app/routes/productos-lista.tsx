@@ -1,20 +1,25 @@
 // app/routes/productos-lista.tsx
 import { Link } from "react-router";
-// --- AÑADIR ---
-import { useProductosContext } from "../root"; // Importa el hook del contexto
+import { useProductosContext } from "~/root";
+import apiClient from "../api"; // <-- Importa axios
 
 export default function ProductosLista() {
-    // --- MODIFICAR: Usa el contexto ---
     const { productos, setProductos } = useProductosContext();
 
-    const handleEliminar = (id: string) => {
-        // Confirma antes de eliminar
+    const handleEliminar = async (id: number) => { // <-- id ahora es number
         if (window.confirm(`¿Seguro que quieres eliminar el producto ${id}?`)) {
-            // --- MODIFICAR: Actualiza el estado filtrando el producto eliminado ---
-            setProductos((productosActuales) =>
-                productosActuales.filter((p) => p.id !== id)
-            );
-            // alert(`Producto ${id} eliminado.`); // Puedes quitar el alert si quieres
+            try {
+                // --- MODIFICAR: Llamada a la API ---
+                await apiClient.delete(`/productos/${id}`);
+
+                // Actualiza el estado local DESPUÉS de que la API confirme
+                setProductos((productosActuales) =>
+                    productosActuales.filter((p) => p.id !== id)
+                );
+            } catch (error) {
+                console.error("Error al eliminar producto:", error);
+                alert("No se pudo eliminar el producto.");
+            }
         }
     };
 
@@ -29,13 +34,14 @@ export default function ProductosLista() {
                     Crear Producto
                 </Link>
             </div>
+            {/* ... (resto del JSX igual, el .map funcionará) ... */}
             {productos.length === 0 ? (
                 <p>No hay productos para mostrar.</p>
             ) : (
                 <ul className="space-y-2">
                     {productos.map((p) => (
                         <li key={p.id} className="flex justify-between items-center p-3 border rounded-lg shadow-sm">
-                            <span className="text-lg">{p.nombre}</span>
+                            <span className="text-lg">{p.nombre} (Precio: ${p.precio})</span> {/* Mostramos más datos */}
                             <div className="flex gap-2">
                                 <Link
                                     to={`/productos/${p.id}/editar`}
