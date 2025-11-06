@@ -1,87 +1,34 @@
-# Welcome to React Router!
+# Frontend de API de Productos (React + Vite)
 
-A modern, production-ready template for building full-stack React applications using React Router.
+Esta es una interfaz de usuario (UI) construida con React (Vite) y React Router. Sirve como frontend para el proyecto `api-productos` (el backend de NestJS).
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
+La aplicación permite a los usuarios ver, crear, editar y eliminar productos de la base de datos.
 
-## Features
+## Características
 
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+* **CRUD Completo:** Implementa todas las operaciones (Crear, Leer, Actualizar, Eliminar) para los productos.
+* **Conexión a la API:** Utiliza `axios` para comunicarse con la API de NestJS en `http://localhost:3000/api/v1`.
+* **Paginación:** La lista de productos está paginada (carga los productos en lotes) para un mejor rendimiento.
+* **Gestión de Estado:** Usa `React.Context` (`useProductosContext`) para manejar el estado de los productos de forma global en la app.
+* **Estilos con TailwindCSS:** Configurado con TailwindCSS para un diseño rápido.
 
-## Getting Started
+## Requisitos Previos
 
-### Installation
+1.  **Node.js:** Asegúrate de tener Node.js (v18 o superior) instalado.
+2.  **Backend Corriendo:** Esta aplicación **no funcionará** si el backend (`api-productos`) no está ejecutándose.
 
-Install the dependencies:
+## 1. Instalación
+
+Instala las dependencias del proyecto:
 
 ```bash
 npm install
-```
+2. Ejecución (Modo Desarrollo)
+¡Importante! Antes de iniciar el frontend, asegúrate de que tu API de NestJS (api-productos) ya esté corriendo en http://localhost:3000.
 
-### Development
+Una vez que el backend esté listo, inicia el servidor de desarrollo de Vite:
 
-Start the development server with HMR:
+Bash
 
-```bash
 npm run dev
-```
-
-Your application will be available at `http://localhost:5173`.
-
-## Building for Production
-
-Create a production build:
-
-```bash
-npm run build
-```
-
-## Deployment
-
-### Docker Deployment
-
-To build and run using Docker:
-
-```bash
-docker build -t my-app .
-
-# Run the container
-docker run -p 3000:3000 my-app
-```
-
-The containerized application can be deployed to any platform that supports Docker, including:
-
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
-
-### DIY Deployment
-
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-```
-├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
-```
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
-
----
-
-Built with ❤️ using React Router.
+La aplicación estará disponible en: http://localhost:5173
