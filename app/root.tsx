@@ -1,4 +1,3 @@
-// app/root.tsx
 import {
     isRouteErrorResponse,
     Links,
@@ -10,14 +9,11 @@ import {
 } from "react-router";
 import type { Route } from "./+types/root";
 import "./app.css";
-// --- AÑADIR ---
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import apiClient from "./api"; // <-- Importa tu cliente axios
 
-// --- AÑADIR: Define el tipo de Producto (DEBE COINCIDIR CON LA API) ---
-// Este tipo ahora coincide con tu entidad de NestJS
 export type Producto = {
-    id: number; // <-- Era string, ahora es number
+    id: number;
     nombre: string;
     descripcion: string;
     precio: number;
@@ -69,12 +65,11 @@ export default function App() {
                 setProductos(response.data); // Carga los datos de la API en el estado
             } catch (error) {
                 console.error("Error al cargar productos:", error);
-                // Aquí podrías manejar el error, ej: mostrar un mensaje
             }
         };
 
-        fetchProductos(); // Llama a la función al montar el componente
-    }, []); // El array vacío [] significa que solo se ejecuta una vez
+        fetchProductos();
+    }, []);
 
     return <Outlet context={{ productos, setProductos } satisfies ContextType} />;
 }

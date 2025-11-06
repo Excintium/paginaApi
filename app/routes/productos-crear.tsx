@@ -21,7 +21,7 @@ export default function ProductosCrear() {
         const nuevoProducto = {
             nombre,
             descripcion,
-            precio, // Asegúrate de que el precio se envíe como número
+            precio,
             stock,
         };
 
